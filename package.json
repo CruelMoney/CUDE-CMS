@@ -3,13 +3,10 @@
   "version": "0.0.1",
   "description": "CUDE CMS",
   "author": "Christopher Ulrick Dengsø",
-  "private": true,
   "engines": {
     "node": "8.1.0"
   },
-  "scripts": {
-
-  },
+  "scripts": {},
   "babel": {
     "presets": [
       "es2015",
@@ -30,7 +27,18 @@
     "redux": "^3.6.0",
     "whatwg-fetch": "^1.0.0"
   },
-  "devDependencies": {
-   
-  }
+  "devDependencies": {},
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CruelMoney/CUDE-CMS.git"
+  },
+  "keywords": [
+    "cms"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CruelMoney/CUDE-CMS/issues"
+  },
+  "homepage": "https://github.com/CruelMoney/CUDE-CMS#readme"
 }
