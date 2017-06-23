@@ -1,0 +1,33 @@
+/* common style for the cms system */
+
+:global{
+
+
+textarea {
+    border: none;
+    overflow: auto;
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    line-height: inherit;
+    resize: none;
+    font: inherit;
+    width: 100%;
+    background: transparent;
+    color: inherit;
+}
+
+.editable{
+  outline-color:rgb(153, 153, 158);
+  outline-style: auto;
+  outline-width: 5px;
+  min-width: 10px;
+  min-height: 10px;
+}
+
+.error{
+  color: red;
+}
+
+}
+
