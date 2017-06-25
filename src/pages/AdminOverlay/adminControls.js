@@ -29,7 +29,6 @@ class Controls extends React.Component {
   componentWillReceiveProps(nextprops){
     if(nextprops.loading){
       this.loadingInterval = setInterval(()=>{
-        console.log("suh dude")
         this.setState({
           savePlaceholder: (this.state.savePlaceholder+1) % 3
       })}, 1000);
