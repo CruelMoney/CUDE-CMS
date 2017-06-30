@@ -9,7 +9,6 @@ const DeepMerge = require('deep-merge');
 const Visualizer = require('webpack-visualizer-plugin');
 const webpackSourceMapSupport = require("webpack-source-map-support");
 var cssvariables = require('postcss-css-variables');
-require('dotenv').config()
 const resolveOwn = relativePath => path.resolve(__dirname, '.', relativePath);
 
 // remove current build

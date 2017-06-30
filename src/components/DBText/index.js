@@ -18,11 +18,12 @@ class EditableText extends React.Component {
                     style={this.props.style}
                     className={this.props.className + " editable"}
                     ref={(textArea) => {
-                    if (textArea) { // paste everything as plain text inside editable area textArea.addEventListener("paste", function(e) { e.preventDefault(); var text = e.clipboardData.getData("text/plain"); document.execCommand("insertHTML", false, text); }) } }}
-                    contentEditable
-                    style={{
-                    whiteSpace: "pre-line"
-                }}
+                    if (textArea) { // paste everything as plain text inside editable area 
+                        textArea.addEventListener("paste", function(e) { e.preventDefault(); var text = e.clipboardData.getData("text/plain"); document.execCommand("insertHTML", false, text); }) } }}
+                            contentEditable
+                            style={{
+                            whiteSpace: "pre-line"
+                        }}
                     onInput={(event) => {
                     this
                         .props
@@ -33,7 +34,7 @@ class EditableText extends React.Component {
                     dangerouslySetInnerHTML={{
                     __html: content
                 }}/>
-            : //if not editmode < div style = {
+            : < div style = {
                 this.props.style
             }
             className = {
