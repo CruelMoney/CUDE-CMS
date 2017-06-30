@@ -11,8 +11,10 @@ import Instagram from './assets/icons/instagram.svg'
 import Twitter from './assets/icons/twitter.svg'
 import Snapchat from './assets/icons/snapchat.svg'
 import apiData from './higher-order-components/Fetcher/reducer';
-import adminOverlay from './pages/AdminOverlay/reducer'; 
+import adminOverlay from './pages/AdminOverlay/reducer';
 import * as helperFunctions from './utils/helperFunctions'
+import Config from 'config-singleton'
+Config.load('default-config.json');
 
 const Icons = {
     Facebook,
@@ -26,7 +28,7 @@ const reducers = {
 }
 
 export {
-
+    Config,
     AdminOverlay,
     cursorPoistion,
     editor,
