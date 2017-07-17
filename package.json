@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "gulp frontend-build",
-    "prepublish": "yarn run build"
+    "prepare": "yarn run build"
   },
   "babel": {
     "presets": [
@@ -35,7 +35,6 @@
     "file-loader": "^0.11.2",
     "fs-extra": "^3.0.1",
     "gulp": "^3.9.1",
-    "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
     "object-assign": "^4.1.1",
     "object-fit-images": "^3.2.3",

@@ -1,5 +1,3 @@
-import "isomorphic-fetch"
-
 export const FETCH_REQUEST = 'FETCH_REQUEST'  
 export function fetchRequest (endpoint) {  
   return { type: FETCH_REQUEST, endpoint }
