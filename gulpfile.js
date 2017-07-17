@@ -297,13 +297,15 @@ var frontendConfig = config({
 var backendConfig = config({
   entry: [
     require.resolve('./conf/polyfills'),
-    resolveOwn("./src/serverRender.js"),
+    resolveOwn("./src/index.js"),
   ],
   target: 'node',
   //externals: [nodeExternals()],
-  output: {
-    path: resolveOwn('./public/build/server'),
-    filename: 'serverRender.js',
+ output: {
+    path: resolveOwn('./build'),
+    filename: 'index.js',
+    chunkFilename: '[name].chunk.js',
+    publicPath: '/',
     libraryTarget: 'commonjs2'
   },
   node: {
