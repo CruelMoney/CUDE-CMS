@@ -9,6 +9,8 @@ import PandaPlaceholder from './components/PandaPlaceholder'
 import Facebook from './assets/icons/facebook.svg'
 import Instagram from './assets/icons/instagram.svg'
 import Twitter from './assets/icons/twitter.svg'
+import Cross from './assets/icons/cross.svg'
+import Arrow from './assets/icons/arrow.svg'
 import GooglePlay from './assets/icons/google-play-badge.png'
 import AppStore from './assets/icons/app-store-badge.png'
 import InstaHeart from './assets/icons/instaheart.png'
@@ -18,6 +20,7 @@ import InstaHeartFilled from './assets/icons/instaheart-filled.png'
 import Snapchat from './assets/icons/snapchat.svg'
 import apiData from './higher-order-components/Fetcher/reducer';
 import adminOverlay from './pages/AdminOverlay/reducer'; 
+import * as helperFunctions from './utils/helperFunctions'
 
 const Icons = {
     Facebook,
@@ -29,11 +32,13 @@ const Icons = {
     InstaHeart,
     InstaComment,
     InstaCommentFilled,
-    InstaHeartFilled
+    InstaHeartFilled,
+    Cross,
+    Arrow
 }
 const reducers = {
     apiData,
-    adminOverlay
+    adminOverlay,
 }
 
 export {
@@ -46,5 +51,6 @@ export {
     LoadingImage,
     PandaPlaceholder,
     Icons,
-    reducers
+    reducers,
+    helperFunctions
 }
