@@ -4,6 +4,7 @@ import editor from './higher-order-components/Editor'
 import fetcher from './higher-order-components/Fetcher'
 import DBImage from './components/DBImage'
 import DBText from './components/DBText'
+import {EditableText} from './components/DBText'
 import LoadingImage from './components/LoadingImage'
 import PandaPlaceholder from './components/PandaPlaceholder'
 import Facebook from './assets/icons/facebook.svg'
@@ -48,6 +49,7 @@ export {
     fetcher,
     DBImage,
     DBText,
+    EditableText,
     LoadingImage,
     PandaPlaceholder,
     Icons,
