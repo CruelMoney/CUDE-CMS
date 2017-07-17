@@ -1,7 +1,7 @@
 import AdminOverlay from './pages/AdminOverlay/index'
 import cursorPoistion from './higher-order-components/CursorPosition'
 import editor from './higher-order-components/Editor'
-import fetcher from './higher-order-components/fetcher'
+import fetcher from './higher-order-components/Fetcher'
 import DBImage from './components/DBImage'
 import DBText from './components/DBText'
 import LoadingImage from './components/LoadingImage'
@@ -9,18 +9,27 @@ import PandaPlaceholder from './components/PandaPlaceholder'
 import Facebook from './assets/icons/facebook.svg'
 import Instagram from './assets/icons/instagram.svg'
 import Twitter from './assets/icons/twitter.svg'
+import GooglePlay from './assets/icons/google-play-badge.png'
+import AppStore from './assets/icons/app-store-badge.png'
+import InstaHeart from './assets/icons/instaheart.png'
+import InstaComment from './assets/icons/instacomment.png'
+import InstaCommentFilled from './assets/icons/instacomment-filled.png'
+import InstaHeartFilled from './assets/icons/instaheart-filled.png'
 import Snapchat from './assets/icons/snapchat.svg'
 import apiData from './higher-order-components/Fetcher/reducer';
-import adminOverlay from './pages/AdminOverlay/reducer';
-import * as helperFunctions from './utils/helperFunctions'
-import Config from 'config-singleton'
-Config.load('default-config.json');
+import adminOverlay from './pages/AdminOverlay/reducer'; 
 
 const Icons = {
     Facebook,
     Instagram,
     Twitter,
-    Snapchat
+    Snapchat,
+    GooglePlay,
+    AppStore,
+    InstaHeart,
+    InstaComment,
+    InstaCommentFilled,
+    InstaHeartFilled
 }
 const reducers = {
     apiData,
@@ -28,7 +37,6 @@ const reducers = {
 }
 
 export {
-    Config,
     AdminOverlay,
     cursorPoistion,
     editor,
@@ -38,6 +46,5 @@ export {
     LoadingImage,
     PandaPlaceholder,
     Icons,
-    reducers,
-    helperFunctions
+    reducers
 }

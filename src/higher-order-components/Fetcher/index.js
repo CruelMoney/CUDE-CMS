@@ -3,22 +3,34 @@ import React from 'react';
 import { fetchData } from './actions';
 import PropTypes from 'prop-types'
 
-export default function fetcher(WrappedComponent, APIEndpoint) {
+export default function fetcher(
+    WrappedComponent, 
+    APIEndpoint, 
+    serverFetch = true // Fetching on server? Will increase response time
+) {
   
 
     const mapStateToProps = (state, ownProps) => {
-        const apidata = state.apiData[APIEndpoint]
+        const publicURL = state.adminOverlay.publicURL
+        const apidata = state.apiData[publicURL+APIEndpoint]
         return {
             data:  apidata && apidata.data ? apidata.data : [],
             haveFetched: apidata && apidata.data ? true : false,
             fetching: apidata ? apidata.fetching : false,
-            editMode:  state.adminOverlay.editMode
+            editMode:  state.adminOverlay.editMode,
+            publicURL: publicURL // Has to be set by theme or server
         }
     }
     const mapDispatchToProps = (dispatch) => {  
-        return { fetchData: () => dispatch(fetchData(APIEndpoint)) }
+        return { fetchData: (publicURL) => dispatch(fetchData(publicURL+APIEndpoint)) }
     }
-
+    const mergeProps = (stateProps, dispatchProps, ownProps) => {
+        return {
+            ...stateProps,
+            fetchData: () => dispatchProps.fetchData(stateProps.publicURL),
+            ...ownProps
+        }
+    }
     class Fetcher extends React.Component {
         
         static contextTypes={
@@ -26,13 +38,20 @@ export default function fetcher(WrappedComponent, APIEndpoint) {
          }
 
         componentWillMount () {
-            if(!this.props.fetching){
+            if(!this.props.fetching && serverFetch){
                 if (this.context.staticContext && !this.context.staticContext.resolved){
                     const store = this.context.staticContext.store
-                    this.context.staticContext.promises.push(store.dispatch(fetchData(APIEndpoint)))
+                    this.context.staticContext.promises.push(store.dispatch(fetchData(this.props.publicURL + APIEndpoint)))
                 }else{
                     if (this.props.data.length === 0) this.props.fetchData()
                 }
+            }
+        }
+
+        componentDidMount(){
+            
+             if (!serverFetch && this.props.data.length === 0) {
+                 this.props.fetchData()
             }
         }
 
@@ -43,7 +62,7 @@ export default function fetcher(WrappedComponent, APIEndpoint) {
         }
     };
 
-return connect(mapStateToProps, mapDispatchToProps)(Fetcher)
+return connect(mapStateToProps, mapDispatchToProps, mergeProps)(Fetcher)
 
 
 
