@@ -249,7 +249,7 @@ const commonPlugins = [
             allChunks: true,
             //ignoreOrder: true,
             // dont use in development, here we want the hot stuff ;P
-            disable: process.env.NODE_ENV !== 'production'
+            //disable: process.env.NODE_ENV !== 'production'
   }),
   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 ]
