@@ -74,6 +74,8 @@ class EditableImage extends React.Component {
     }
 
     handleAccept = (files) =>{
+        // TODO changing the image does not remove old promise, thus uploading twice
+        // so.. somehow remove old promise from state
         this.setState({src: files[0].preview})
         this.props.registerPromise(this.upload(files[0]))
     }

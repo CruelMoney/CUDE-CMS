@@ -66,12 +66,7 @@ export function saveEdits (apiData) {
 
     Promise.all(promises)
       .then((res) =>{
-        if (res.every(r=>r.ok)){
-          dispatch(saveEditsSucceded(endpoints, res))
-        }else{
-          dispatch(saveEditsFailed("Not all saved"))
-          alert("Something could not be saved.")
-        }
+        dispatch(saveEditsSucceded(endpoints, res))    
       })
       .catch(err=>{
         dispatch(saveEditsFailed(err))
