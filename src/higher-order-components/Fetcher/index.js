@@ -13,8 +13,10 @@ export default function fetcher(
     const mapStateToProps = (state, ownProps) => {
         const publicURL = state.adminOverlay.publicURL
         const apidata = state.apiData[publicURL+APIEndpoint]
+        let data = apidata && apidata.data ? apidata.data : []
+        data = ownProps.data ? [...data, ...ownProps.data] : data
         return {
-            data:  apidata && apidata.data ? apidata.data : [],
+            data:  data,
             haveFetched: apidata && apidata.data ? true : false,
             fetching: apidata ? apidata.fetching : false,
             editMode:  state.adminOverlay.editMode,
