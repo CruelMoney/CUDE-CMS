@@ -13,17 +13,11 @@ export default function fetcher(
     const mapStateToProps = (state, ownProps) => {
         const publicURL = state.adminOverlay.publicURL
         const apidata = state.apiData[publicURL+APIEndpoint]
-        let data = apidata && apidata.data ? apidata.data : []
-        data = ownProps.data ? [...data, ...ownProps.data] : data
+        const data = apidata && apidata.data ? apidata.data : []
         return {
-            ...ownProps,
-            data:  data,
-            // if there is data and merge with ownprops if that also has haveFetched property (fetcher inside fetcher)
-            haveFetched: (!!(apidata && apidata.data) && 
-                (typeof ownProps.haveFetched !== 'undefined' ? ownProps.haveFetched : true)),
-            // same deal as haveFetched
-            fetching: (!!(apidata && apidata.fetching)) && 
-                (typeof ownProps.fetching !== 'undefined' ? ownProps.fetching : true),
+            data: ownProps.data ? [...ownProps.data, ...data] : data,
+            haveFetched: apidata && apidata.data ? true : false,
+            fetching: apidata ? apidata.fetching : false,
             editMode:  state.adminOverlay.editMode,
             publicURL: publicURL // Has to be set by theme or server
         }
@@ -34,7 +28,8 @@ export default function fetcher(
     const mergeProps = (stateProps, dispatchProps, ownProps) => {
         return {
             ...stateProps,
-            fetchData: () => dispatchProps.fetchData(stateProps.publicURL)            
+            fetchData: () => dispatchProps.fetchData(stateProps.publicURL),
+            ...ownProps
         }
     }
     class Fetcher extends React.Component {
