@@ -27,9 +27,9 @@ export default function fetcher(
     }
     const mergeProps = (stateProps, dispatchProps, ownProps) => {
         return {
+            ...ownProps,
             ...stateProps,
             fetchData: () => dispatchProps.fetchData(stateProps.publicURL),
-            ...ownProps
         }
     }
     class Fetcher extends React.Component {
@@ -58,8 +58,9 @@ export default function fetcher(
 
         render() {
         return <WrappedComponent 
+                {...this.props}
                 data={this.props.data} 
-                {...this.props} />;
+                />;
         }
     };
 
