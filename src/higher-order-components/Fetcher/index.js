@@ -15,10 +15,10 @@ export default function fetcher(
         const apidata = state.apiData[publicURL+APIEndpoint]
         const data = apidata && apidata.data ? apidata.data : []
         return {
-            data: ownProps.data ? [...ownProps.data, ...data] : data,
+            data: ownProps.data ? [...data, ...ownProps.data] : data,
             haveFetched: apidata && apidata.data ? true : false,
             fetching: apidata ? apidata.fetching : false,
-            editMode:  state.adminOverlay.editMode,
+            editMode:  !!state.adminOverlay.editMode,
             publicURL: publicURL // Has to be set by theme or server
         }
     }

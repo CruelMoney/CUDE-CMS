@@ -10,6 +10,7 @@ import PandaPlaceholder from './components/PandaPlaceholder'
 import Facebook from './assets/icons/facebook.svg'
 import Instagram from './assets/icons/instagram.svg'
 import Twitter from './assets/icons/twitter.svg'
+import Github from './assets/icons/github.svg'
 import Cross from './assets/icons/cross.svg'
 import Arrow from './assets/icons/arrow.svg'
 import GooglePlay from './assets/icons/google-play-badge.png'
@@ -35,7 +36,8 @@ const Icons = {
     InstaCommentFilled,
     InstaHeartFilled,
     Cross,
-    Arrow
+    Arrow,
+    Github
 }
 const reducers = {
     apiData,
