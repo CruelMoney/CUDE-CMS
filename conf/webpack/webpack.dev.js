@@ -49,7 +49,8 @@ var backendConfig = {
     path: resolveOwn('../../public/build/'),
     filename: 'static/js/main.js',
     chunkFilename: 'static/js/[name].chunk.js',
-    publicPath: '/'
+    publicPath: '/',
+    libraryTarget: 'commonjs',
   },
   plugins: [
     new webpack.DefinePlugin({
