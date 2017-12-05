@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const watch = require('gulp-watch');
+const shell = require('gulp-shell')
 const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
@@ -404,10 +405,10 @@ gulp.task('run-demo', () =>{
   webpack(backendConfig).run(onBuild(function(){
     console.log("DONE");
   }));
+  shell
   return watch('src', function () {
     console.log("Changes detected")    
     webpack(backendConfig).run(onBuild(function(){
-      console.log("DONE");
     }));
   });
 });
