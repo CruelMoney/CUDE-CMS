@@ -49,14 +49,10 @@ const renderer = (req, res, stream, htmlData, options) => {
   // adding state to initial render
   const preloadedState = getStoreFromRequest(req, res).getState();
   
-  console.log(JSON.stringify(preloadedState).replace(/</g, '\\u003c'))
   htmlData = htmlData.replace(
     `"%PRELOADED_STATE%"`, 
     JSON.stringify(preloadedState).replace(/</g, '\\u003c')
-  );
-
-  console.log(htmlData)
-  
+  );  
 
   var segments = htmlData.split('<div id="root">');
   res.write(segments[0] + '<div id="root">');

@@ -399,10 +399,13 @@ gulp.task('run-demo', ['backend-build'], function () {
 });
 
 gulp.task('run-demo', () =>{
+  process.env.BABEL_ENV = 'production';
+  process.env.NODE_ENV = 'production';
+  webpack(backendConfig).run(onBuild(function(){
+    console.log("DONE");
+  }));
   return watch('src', function () {
     console.log("Changes detected")    
-    process.env.BABEL_ENV = 'production';
-    process.env.NODE_ENV = 'production';
     webpack(backendConfig).run(onBuild(function(){
       console.log("DONE");
     }));
