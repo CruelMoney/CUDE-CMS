@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const watch = require('gulp-watch');
 const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
@@ -277,7 +278,6 @@ if(process.env.NODE_ENV === 'production'){
 // frontend
 var frontendConfig = config({
   entry: [
-    require.resolve('./conf/polyfills'),
     resolveOwn("./src/index.js"),
   ],
   output: {
@@ -296,8 +296,7 @@ var frontendConfig = config({
 
 var backendConfig = config({
   entry: [
-    require.resolve('./conf/polyfills'),
-    resolveOwn("./src/index.js"),
+    resolveOwn("./src/index.js")
   ],
   target: 'node',
   //externals: [nodeExternals()],
@@ -383,5 +382,29 @@ gulp.task('run', ['frontend-build-dev', 'backend-build-dev'], function () {
    // exec: "babel-node",
   }).on('restart', function () {
     console.log('Patched!');
+  });
+});
+
+
+gulp.task('run-demo', ['backend-build'], function () {
+  const nodemon = require('nodemon')
+  nodemon({
+    script: false,
+    "watch": [
+      "./src"
+     ]
+  }).on('restart', function () {
+    console.log('Patched!');
+  });
+});
+
+gulp.task('run-demo', () =>{
+  return watch('src', function () {
+    console.log("Changes detected")    
+    process.env.BABEL_ENV = 'production';
+    process.env.NODE_ENV = 'production';
+    webpack(backendConfig).run(onBuild(function(){
+      console.log("DONE");
+    }));
   });
 });
