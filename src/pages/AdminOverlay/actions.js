@@ -46,9 +46,12 @@ export function saveEdits (apiData) {
     Object.keys(apiData).forEach(endpoint=>{
       if (!apiData[endpoint].isEndpoint || !apiData[endpoint].edits){ return }
       Object.keys(apiData[endpoint].edits).forEach(id=>{
+
+        const entityExists = !!id && id !== 'undefined';
+ 
         promises.push(
-          fetch(endpoint+'/'+id, {
-              method: 'PATCH',
+          fetch(endpoint+'/'+( entityExists ? id : ''), {
+              method: entityExists ? 'PATCH' : 'POST',
               credentials: 'include',
               headers: new Headers({
                 'Content-Type': 'application/json'

@@ -1,8 +1,11 @@
 import React from 'react';
-import editor from '../../higher-order-components/Editor/index';
+import connectEditor from '../../higher-order-components/Editor/index';
 import fetcher from '../../higher-order-components/Fetcher/index';
-import { withRouter } from 'react-router'
-import PropTypes from 'prop-types'
+import { withRouter } from 'react-router';
+import PropTypes from 'prop-types';
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+
 
 
 class EditableText extends React.Component {
@@ -11,37 +14,44 @@ class EditableText extends React.Component {
         registerEdits: PropTypes.func.isRequired
     }
 
+    onContentStateChange = (change) => {
+        console.log(change)
+    }
+
 
     render() {
         const content = this.props.content || this.props.children
 
         return (
                 this.props.editMode ?
-                <div
-                style={this.props.style}
-                className={this.props.className + " editable"}
-                ref={(textArea) => 
-                        { 
-                            if(textArea){
-                                // paste everything as plain text inside editable area
-                                textArea.addEventListener("paste", function(e) {
-                                    e.preventDefault();
-                                    var text = e.clipboardData.getData("text/plain");
-                                    document.execCommand("insertHTML", false, text);
-                                }) 
-                            }
-                        }
-                    }
-                contentEditable
-                style={{ whiteSpace: "pre-line"}}
-                onInput={(event)=>{
-                    this.props.registerEdits(this.props.entityID,{
-                        [this.props.entityField] : event.target.innerHTML,
-                        key: this.props.dbKey
-                    })
-                    }}
-                dangerouslySetInnerHTML={{__html: content} }
-                />
+                
+                <Editor />
+
+                // <div
+                // style={this.props.style}
+                // className={this.props.className + " editable"}
+                // ref={(textArea) => 
+                //         { 
+                //             if(textArea){
+                //                 // paste everything as plain text inside editable area
+                //                 textArea.addEventListener("paste", function(e) {
+                //                     e.preventDefault();
+                //                     var text = e.clipboardData.getData("text/plain");
+                //                     document.execCommand("insertHTML", false, text);
+                //                 }) 
+                //             }
+                //         }
+                //     }
+                // contentEditable
+                // style={{ whiteSpace: "pre-line"}}
+                // onInput={(event)=>{
+                //     this.props.registerEdits(this.props.entityID,{
+                //         [this.props.entityField] : event.target.innerHTML,
+                //         key: this.props.dbKey
+                //     })
+                //     }}
+                // dangerouslySetInnerHTML={{__html: content} }
+                // />
                 : //if not editmode
                 <div 
                     style={this.props.style}
@@ -114,7 +124,7 @@ class ConnectedText extends React.Component {
 
 export default withRouter(
     fetcher(
-        editor(ConnectedText, "/api/texts"), 
+        connectEditor(ConnectedText, "/api/texts"), 
     "/api/texts")
 );
 

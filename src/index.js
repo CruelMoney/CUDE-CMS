@@ -4,6 +4,7 @@ import editor from './higher-order-components/Editor'
 import fetcher from './higher-order-components/Fetcher'
 import DBImage from './components/DBImage'
 import DBText from './components/DBText'
+import DBWysiwyg from './components/DBWysiwyg'
 import {EditableText} from './components/DBText'
 import LoadingImage from './components/LoadingImage'
 import PandaPlaceholder from './components/PandaPlaceholder'
@@ -52,6 +53,7 @@ export {
     fetcher,
     DBImage,
     DBText,
+    DBWysiwyg,
     EditableText,
     LoadingImage,
     PandaPlaceholder,

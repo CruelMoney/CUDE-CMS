@@ -8,7 +8,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 const fs = require('fs-extra');
 const DeepMerge = require('deep-merge');
-const Visualizer = require('webpack-visualizer-plugin');
 const webpackSourceMapSupport = require("webpack-source-map-support");
 var cssvariables = require('postcss-css-variables');
 const resolveOwn = relativePath => path.resolve(__dirname, '.', relativePath);
@@ -322,7 +321,6 @@ var backendConfig = config({
 
 if(process.env.NODE_ENV === 'development'){
   backendConfig.plugins.push[new webpackSourceMapSupport()]
-  frontendConfig.plugins.push[new Visualizer()]
 }
 
 

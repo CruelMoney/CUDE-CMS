@@ -62,9 +62,11 @@ export default function reducer(state = initialState, action) {
         }else if(state[action.endpoint].edits && state[action.endpoint].edits[action.id]){
             edits = state[action.endpoint].edits[action.id]
         }
-        const updatedEdits = update(edits, Object.keys(action.edits)[0], function(originalValue) {
-            return action.edits[Object.keys(action.edits)[0]]
-        })
+        const updatedEdits = {
+            ...edits,
+            ...action.edits
+        }
+        
         return{
                 ...state,
                 [action.endpoint] : {

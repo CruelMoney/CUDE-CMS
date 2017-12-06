@@ -31,6 +31,7 @@
     "css-loader": "^0.28.7",
     "deep-merge": "^1.0.0",
     "dotenv": "^4.0.0",
+    "draft-js": "^0.10.4",
     "eslint": "^4.12.1",
     "eslint-config-react-app": "^2.0.1",
     "eslint-loader": "^1.8.0",
@@ -52,6 +53,8 @@
     "react": "^16.2.0",
     "react-cursor-position": "^2.1.0",
     "react-dev-utils": "^4.2.1",
+    "react-dom": "^16.2.0",
+    "react-draft-wysiwyg": "^1.11.0",
     "react-dropzone": "^4.2.3",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
@@ -59,8 +62,11 @@
     "react-svg-loader": "^2.1.0",
     "redux": "^3.7.2",
     "url-loader": "^0.6.2",
-    "webpack-source-map-support": "^2.0.1",
-    "webpack-visualizer-plugin": "^0.1.11"
+    "webpack-source-map-support": "^2.0.1"
+  },
+  "peerDependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "devDependencies": {
     "babel-loader": "^7.1.2",
