@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
-import { fetchData } from './actions';
-import PropTypes from 'prop-types'
+import { fetchData as fetchDataAction } from './actions';
+import { withRouter } from 'react-router'
 
 export default function fetcher(
     WrappedComponent, 
@@ -23,7 +23,7 @@ export default function fetcher(
         }
     }
     const mapDispatchToProps = (dispatch) => {  
-        return { fetchData: (publicURL) => dispatch(fetchData(publicURL+APIEndpoint)) }
+        return { fetchData: (publicURL) => dispatch(fetchDataAction(publicURL+APIEndpoint)) }
     }
     const mergeProps = (stateProps, dispatchProps, ownProps) => {
         return {
@@ -33,24 +33,28 @@ export default function fetcher(
         }
     }
     class Fetcher extends React.Component {
-        
-        static contextTypes={
-            staticContext: PropTypes.object
-         }
 
         componentWillMount () {
-            if(!this.props.fetching && serverFetch){
-                if (this.context.staticContext && !this.context.staticContext.resolved){
-                    const store = this.context.staticContext.store
-                    this.context.staticContext.promises.push(store.dispatch(fetchData(this.props.publicURL + APIEndpoint)))
+            const {
+                fetching,
+                staticContext,
+                data,
+                publicURL,
+                fetchData
+            } = this.props;
+
+            if(!fetching && serverFetch){
+                console.log("fetchercontext: ", staticContext)
+                if (staticContext && !staticContext.resolved){
+                    const store = staticContext.store
+                    staticContext.promises.push(store.dispatch(fetchDataAction(publicURL + APIEndpoint)))
                 }else{
-                    if (this.props.data.length === 0) this.props.fetchData()
+                    if (data.length === 0) fetchData()
                 }
             }
         }
 
         componentDidMount(){
-            
              if (!serverFetch && this.props.data.length === 0) {
                  this.props.fetchData()
             }
@@ -64,7 +68,9 @@ export default function fetcher(
         }
     };
 
-return connect(mapStateToProps, mapDispatchToProps, mergeProps)(Fetcher)
+return withRouter(
+    connect(mapStateToProps, mapDispatchToProps, mergeProps)(Fetcher)
+)
 
 
 

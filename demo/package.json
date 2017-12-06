@@ -4,12 +4,15 @@
   "private": true,
   "main": "./dist/build/bundle.js",
   "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "tailwind build ./src/index.tailwind.css -c ./tailwind.js -o ./src/index.css && react-scripts start",
