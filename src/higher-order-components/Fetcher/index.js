@@ -3,13 +3,14 @@ import React from 'react';
 import { fetchData as fetchDataAction } from './actions';
 import { withRouter } from 'react-router'
 
+
 export default function fetcher(
     WrappedComponent, 
     APIEndpoint, 
-    serverFetch = true // Fetching on server? Will increase response time
+    serverFetch = true, // Fetching on server? Will increase response time
+    loadingComponent = false
 ) {
   
-
     const mapStateToProps = (state, ownProps) => {
         const publicURL = state.adminOverlay.publicURL
         const apidata = state.apiData[publicURL+APIEndpoint]
@@ -44,7 +45,6 @@ export default function fetcher(
             } = this.props;
 
             if(!fetching && serverFetch){
-                console.log("fetchercontext: ", staticContext)
                 if (staticContext && !staticContext.resolved){
                     const store = staticContext.store
                     staticContext.promises.push(store.dispatch(fetchDataAction(publicURL + APIEndpoint)))
@@ -61,17 +61,21 @@ export default function fetcher(
         }
 
         render() {
-        return <WrappedComponent 
-                {...this.props}
-                data={this.props.data} 
-                />;
+            console.log(this.props.haveFetched, loadingComponent)
+        
+            if(!this.props.haveFetched && loadingComponent){
+                return loadingComponent;
+            }
+
+            return <WrappedComponent 
+                    {...this.props}
+                    data={this.props.data} 
+                    />;
         }
     };
 
 return withRouter(
     connect(mapStateToProps, mapDispatchToProps, mergeProps)(Fetcher)
 )
-
-
 
 }

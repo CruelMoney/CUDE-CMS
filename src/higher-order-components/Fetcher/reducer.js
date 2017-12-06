@@ -31,7 +31,7 @@ export default function reducer(state = initialState, action) {
         [action.endpoint] : {
             ...state[action.endpoint],
             isEndpoint: true,
-            data: action.data[Object.keys(action.data)[0]], 
+            data: action.data, 
            fetching : false
         }
       }
@@ -44,13 +44,7 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 [action.endpoint] : {
                     ...state[action.endpoint],
-                    data: state[action.endpoint].data.map(d=>{
-                        if(d._id === action.data._id){
-                            return action.data
-                        }else{
-                            return d
-                        }
-                    })
+                    data: action.data
                 }
             }
 
