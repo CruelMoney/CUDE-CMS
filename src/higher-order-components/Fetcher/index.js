@@ -60,9 +60,7 @@ export default function fetcher(
             }
         }
 
-        render() {
-            console.log(this.props.haveFetched, loadingComponent)
-        
+        render() {        
             if(!this.props.haveFetched && loadingComponent){
                 return loadingComponent;
             }
