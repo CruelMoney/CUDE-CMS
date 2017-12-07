@@ -4,6 +4,9 @@ import fetcher from '../../higher-order-components/Fetcher/index';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { Editor } from 'react-draft-wysiwyg';
+import { convertFromRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 
@@ -14,50 +17,32 @@ class EditableText extends React.Component {
         registerEdits: PropTypes.func.isRequired
     }
 
-    onContentStateChange = (change) => {
-        console.log(change)
+    
+    onContentStateChange = (RawDraftContentState) => {
+        this.props.registerEdits(this.props.entityID,{
+            [this.props.entityField] : JSON.stringify(RawDraftContentState),
+            key: this.props.dbKey
+        })
     }
 
-
     render() {
-        const content = this.props.content || this.props.children
-
+        let { content } = this.props;
+        content = !!content ? JSON.parse(content) : false;
+        const html = !!content ? draftToHtml(content) : '';
+        
         return (
                 this.props.editMode ?
                 
-                <Editor />
+                <Editor
+                    {...this.props}
+                    onContentStateChange={this.onContentStateChange}
+                />
 
-                // <div
-                // style={this.props.style}
-                // className={this.props.className + " editable"}
-                // ref={(textArea) => 
-                //         { 
-                //             if(textArea){
-                //                 // paste everything as plain text inside editable area
-                //                 textArea.addEventListener("paste", function(e) {
-                //                     e.preventDefault();
-                //                     var text = e.clipboardData.getData("text/plain");
-                //                     document.execCommand("insertHTML", false, text);
-                //                 }) 
-                //             }
-                //         }
-                //     }
-                // contentEditable
-                // style={{ whiteSpace: "pre-line"}}
-                // onInput={(event)=>{
-                //     this.props.registerEdits(this.props.entityID,{
-                //         [this.props.entityField] : event.target.innerHTML,
-                //         key: this.props.dbKey
-                //     })
-                //     }}
-                // dangerouslySetInnerHTML={{__html: content} }
-                // />
                 : //if not editmode
                 <div 
                     style={this.props.style}
                     className={this.props.className}
-                    style={{ whiteSpace: "pre-line"}}
-                    dangerouslySetInnerHTML={ {__html: content} }
+                    dangerouslySetInnerHTML={ {__html:  html} }
                 />
 
         

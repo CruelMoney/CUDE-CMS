@@ -299,6 +299,10 @@ var backendConfig = config({
     resolveOwn("./src/index.js")
   ],
   target: 'node',
+  externals: {
+    react: 'react',
+    'react-dom': 'react-dom',
+  },
   //externals: [nodeExternals()],
  output: {
     path: resolveOwn('./build'),
