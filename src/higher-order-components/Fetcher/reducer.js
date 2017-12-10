@@ -42,10 +42,10 @@ export default function reducer(state = initialState, action) {
     case REFRESH_DATA:
         return{
                 ...state,
-                [action.endpoint] : {
-                    ...state[action.endpoint],
-                    data: action.data
-                }
+                // [action.endpoint] : {
+                //     ...state[action.endpoint],
+                //     data: action.data
+                // }
             }
 
       

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Editor } from 'react-draft-wysiwyg';
 import { convertFromRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-
+import {upload as imgUpload} from '../../utils/imageUpload';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 
@@ -17,17 +17,35 @@ class EditableText extends React.Component {
         registerEdits: PropTypes.func.isRequired
     }
 
+    state={
+        content: {}
+    }
+
+    componentWillMount(){
+        let { content } = this.props;
+        content = !!content ? JSON.parse(content) : false;
+        this.setState({
+            content
+        });
+       
+    }
     
     onContentStateChange = (RawDraftContentState) => {
         this.props.registerEdits(this.props.entityID,{
             [this.props.entityField] : JSON.stringify(RawDraftContentState),
             key: this.props.dbKey
+        });
+        this.setState({
+            content: RawDraftContentState
         })
     }
 
+    handleImgUpload = (img) => {
+        return imgUpload(img, this.props.publicURL, null);
+    }
+
     render() {
-        let { content } = this.props;
-        content = !!content ? JSON.parse(content) : false;
+        const { content } = this.state;
         const html = !!content ? draftToHtml(content) : '';
         
         return (
@@ -35,6 +53,19 @@ class EditableText extends React.Component {
                 
                 <Editor
                     {...this.props}
+                    toolbar={{
+                        ...this.props.toolbar,
+                        image: {
+                            urlEnabled: true,
+                            uploadEnabled: true,
+                            alignmentEnabled: true,
+                            uploadCallback: this.handleImgUpload,
+                            alt: { present: true, mandatory: false },
+                            inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg'
+                          },
+                        }}
+                    
+                    initialContentState={content}
                     onContentStateChange={this.onContentStateChange}
                 />
 

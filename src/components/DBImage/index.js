@@ -32,9 +32,6 @@ class EditableImage extends React.Component {
         return () => new Promise((resolve, reject)=>{
             setTimeout(()=>{
 
-
-           
-
             fetch(this.props.publicURL+endPoint, {
             method: dbImage ? "PUT" : 'POST',
             credentials: 'include',
