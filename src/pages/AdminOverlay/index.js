@@ -1,16 +1,11 @@
 import React from 'react';
 import styles from './index.module.css';
 import AdminControls from './adminControls'
+import configurationProvider from '../../higher-order-components/ConfigurationProvider';
 import { connect } from 'react-redux';
 import '../../assets/css/cms.css'
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    user:  state.adminOverlay.user || {},
-    apiData: state.apiData || {},
-    editMode : state.adminOverlay.editMode
-  }
-}
+
 class Admin extends React.Component {
   state={
     controlsVisible: false, 
@@ -42,4 +37,14 @@ class Admin extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(Admin)
+const mapStateToProps = (state, ownProps) => {
+  return {
+    user:  state.adminOverlay.user || {},
+    apiData: state.apiData || {},
+    editMode : state.adminOverlay.editMode
+  }
+}
+
+export default connect(mapStateToProps)(
+  configurationProvider(Admin)
+)

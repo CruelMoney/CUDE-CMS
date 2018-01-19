@@ -2,6 +2,7 @@ import AdminOverlay from './pages/AdminOverlay/index'
 import cursorPoistion from './higher-order-components/CursorPosition'
 import editor from './higher-order-components/Editor'
 import fetcher from './higher-order-components/Fetcher'
+import configurationProvider from './higher-order-components/ConfigurationProvider'
 import DBImage from './components/DBImage'
 import DBText from './components/DBText'
 import DBWysiwyg from './components/DBWysiwyg'
@@ -51,6 +52,7 @@ export {
     cursorPoistion,
     editor,
     fetcher,
+    configurationProvider,
     DBImage,
     DBText,
     DBWysiwyg,
