@@ -63,7 +63,6 @@ class EditableImage extends React.Component {
     render() {
         const dbImage = Array.isArray(this.props.data) && this.props.data.find(img=>img.name === this.props.dbKey)
         const url = dbImage ? dbImage.url : this.state.url
-
         let {dbKey, 
             haveFetched, 
             fetching, 
@@ -118,7 +117,9 @@ class EditableImage extends React.Component {
             :
             ( url ? 
             <LoadingImage 
-            src={this.props.publicURL + url} alt=""/>
+            onClick={this.props.onClick}
+            alt={this.props.alt}
+            src={this.props.publicURL + url} />
             : null)
         
         );

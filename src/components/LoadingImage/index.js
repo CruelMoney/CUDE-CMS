@@ -23,7 +23,6 @@ class Image extends React.Component {
           if (this.img) this.img.style.opacity = null
           if (this.props.onLoad) this.props.onLoad()
           })}
-        
        />
     );
   }
