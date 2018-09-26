@@ -20,7 +20,8 @@ export default function fetcher(
             haveFetched: apidata && apidata.data ? true : false,
             fetching: apidata ? apidata.fetching : false,
             editMode:  !!state.adminOverlay.editMode,
-            publicURL: publicURL // Has to be set by theme or server
+            publicURL: publicURL, // Has to be set by theme or server
+            canAccessKeystone: state.adminOverlay.user && state.adminOverlay.user.canAccessKeystone
         }
     }
     const mapDispatchToProps = (dispatch) => {  
